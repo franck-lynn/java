@@ -1,0 +1,90 @@
+﻿VERSION 139
+! 定义菜单条, 如果出现乱码, 则采用 UTF-8 with BOM 编码, 在 setting.json中设置:
+! "[men]":{
+!        "files.encoding": "UTF-8 with BOM"
+!    }
+! 可以针对 .men 文件结尾的文件, 自动识别并以设置的编码保存
+
+! ************************第1部分开始****************************
+! 入口处就有的菜单
+! 需要注意的是: 注释不要放在命令 名称 ! 后面
+EDIT UG_GATEWAY_MAIN_MENUBAR 
+AFTER UG_WINDOW  ! 定义menubar位置, 在 help 菜单之前
+   ! 声明菜单条 菜单条的名称, 下一级菜单的名称就是在这个名称包裹的名称
+   CASCADE_BUTTON  CUSTOM_MENUBAR_JAVA
+   ! 菜单条名称
+   LABEL java 菜单
+END_OF_AFTER !!结束标签
+! ************************第1部分结束****************************
+
+! ************************第2部分开始****************************
+! 定义下拉菜单,名称和上面定义的菜单条名称一样,标明在这个菜单条下面
+! 这里的 CUSTOM_MENUBAR_JAVA 就是上面定义的 CASCADE_BUTTON 定义的菜单条名称
+MENU CUSTOM_MENUBAR_JAVA
+    BUTTON HELLO_WORLD_JAR
+    LABEL 你好, Open jar! 
+    MESSAGE HELLO OPEN JAR 的第1个文件 
+    ACTIONS HelloOpen.jar
+    
+    
+    BUTTON HELLO_WORLD_CLASS
+    LABEL 你好, Hello Open class! 
+    MESSAGE OPEN CLASS 的第1个文件 
+    ACTIONS "powershell_ise && java --enable-preview '-Dfile.encoding=UTF-8' --class-path='.;f:\working\study\yolanda\java\bin;D:\ugs\nx1980\nx1980\NXBIN\*;H:\java_lib\json.jar' base.actual.HelloOpen "
+    
+    BUTTON HELLO_WORLD_CLASS1
+    LABEL 你好, Hello Open class! 
+    MESSAGE HELLO OPEN CLASS 的第1个文件 
+    ACTIONS HelloOpen
+    
+    BUTTON RMI_JAR
+    LABEL 远程调用 
+    MESSAGE 开启UG服务器远程调用
+    ACTIONS rmi.jar
+        
+    ! 定义一个分割线
+    SEPARATOR
+
+    ! 设置一级菜单, CASCADE_BUTTON 表明还有下级菜单
+    CASCADE_BUTTON HELLO_OPEN_JAR
+    LABEL 一级菜单
+	
+    CASCADE_BUTTON MENU_LEVEL_1_JAR
+    LABEL 一级菜单2
+	
+    CASCADE_BUTTON MENU_LEVEL_2_CALLBACK
+    LABEL 一级菜单3
+
+END_OF_MENU
+!************************第2部分结束****************************
+
+
+
+!************************第3部分开始****************************
+! MENU的名称与层级菜单的上级名称相同
+ MENU HELLO_OPEN_JAR
+    BUTTON  HELLO_OPEN_JAR_LEVEL_1
+	LABEL 查看Parts()
+	ACTIONS ListParts.jar
+     
+	BUTTON CREATE_BLOCK_ID1_2
+	LABEL 利用jdk原生UI创建锥体
+	ACTIONS  TextComponentTest.jar
+END_OF_MENU 
+
+MENU MENU_LEVEL_ID2
+	BUTTON MENU_SECOND_LEVEL_ID2_1
+	LABEL 一级菜单2下的二级菜单1
+	ACTIONS  ConeFamily.jar
+	BUTTON MENU_SECOND_LEVEL_ID2_2
+	LABEL 一级菜单2下的二级菜单2
+END_OF_MENU 
+
+
+MENU MENU_LEVEL_ID3
+	BUTTON MENU_SECOND_LEVEL_ID3_1
+	LABEL 一级菜单3下的二级菜单1
+	BUTTON MENU_SECOND_LEVEL_ID3_2
+	LABEL 一级菜单3下的二级菜单1
+END_OF_MENU 
+!************************第3部分结束****************************

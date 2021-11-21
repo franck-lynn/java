@@ -1,0 +1,45 @@
+﻿TITLE  JAVA选项卡  ! 选项卡显示的标题
+VERSION 170
+
+BEGIN_GROUP CUSTOMTAB_1  ! 组 id
+    LABEL JAVA选项卡A ! 显示选项卡的名称
+    CONTEXT_TITLE JAVA选项卡B ! 显示选项卡下方
+    BITMAP assy_add_context 
+        BUTTON HELLO_WORLD_JAR ! 与菜单中相同的定义, 功能也是一样的
+        BUTTON HELLO_WORLD_CLASS
+        BUTTON HELLO_WORLD_CLASS1
+        BUTTON RMI_JAR
+        
+        ! 制作下拉菜单
+        BEGIN_GALLERY HELLO_OPEN_JAR
+        GALLERY_STYLE SMALL_IMAGE_AND_TEXT
+        
+        
+        LABEL 更多A
+        CONTEXT_TITLE 更多(位置组件)
+        
+        COLLAPSED TRUE
+        COLUMN_IN_RIBBON 1
+        COLUMN_IN_POPUP 1
+        BITMAP remember_constraints
+            BEGIN_GALLERY NX_RBN_ASSEMBLIES_COMPONENT_POSITION_GALLERY
+            LABEL 下拉标题
+            CONTEXT_TITLE 下拉标题 (组件)
+            BITMAP mate_components
+                BUTTON HELLO_OPEN_JAR_LEVEL_1
+                BUTTON UG_NXPOS_SHOW_AND_HIDE_CONSTRAINTS
+                BUTTON UG_NXPOS_REMEMBER_ASSEMBLY_CONSTRAINTS
+            END_GALLERY
+        END_GALLERY
+         
+        BUTTON UG_ASSY_INSERT_COMPONENT 
+
+        BUTTON UG_ASSY_INSERT_NEW_COMPONENT
+
+        BUTTON UG_ASSY_CREATE_NEW_PARENT ! 新建父装配
+        RIBBON_STYLE MEDIUM_IMAGE_AND_TEXT
+
+        BUTTON UG_ASSY_CREATE_DMU_WORKSET
+        RIBBON_STYLE MEDIUM_IMAGE_AND_TEXT
+
+END_GROUP
